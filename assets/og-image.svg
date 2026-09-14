@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <radialGradient id="glow" cx="78%" cy="24%" r="60%">
+      <stop offset="0%" stop-color="#E8560E" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#E8560E" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow2" cx="10%" cy="90%" r="50%">
+      <stop offset="0%" stop-color="#9C3609" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#9C3609" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="#211D19"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <rect width="1200" height="630" fill="url(#glow2)"/>
+
+  <text x="80" y="120" font-family="Arial, sans-serif" font-size="20" letter-spacing="4" fill="#A79A87">EMPRESA JÚNIOR FGV · EDIÇÃO OFICIAL</text>
+
+  <text x="76" y="280" font-family="Arial, sans-serif" font-weight="900" font-size="104" letter-spacing="-3" fill="#FAF8F5">O ABRIDOR</text>
+  <text x="76" y="370" font-family="Arial, sans-serif" font-weight="900" font-size="72" letter-spacing="-2" fill="#E8560E">SOBREVIVE A VOCÊ.</text>
+
+  <text x="80" y="460" font-family="Arial, sans-serif" font-size="26" fill="#CFC3B2">Alumínio aeronáutico 6061 · cordão de 250kg · garantia vitalícia</text>
+
+  <g transform="translate(940,460)" stroke="#F2985D" stroke-width="6" fill="none" stroke-linecap="round">
+    <circle cx="0" cy="0" r="46"/>
+    <path d="M0 -46 v92 M-46 0 h92" stroke-width="4" opacity="0.6"/>
+  </g>
+</svg>

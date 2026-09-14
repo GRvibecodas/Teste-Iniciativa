@@ -1,0 +1,891 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>O Abridor — Empresa Júnior FGV</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="O abridor oficial da Empresa Júnior FGV. Alumínio aeronáutico 6061, cordão de 250kg, garantia vitalícia.">
+
+<!-- Open Graph / preview de link — essencial pra quando esse link circular em grupo de WhatsApp ou Stories.
+     ATENÇÃO ao publicar de verdade: og:image e og:url precisam ser URLs ABSOLUTAS (https://seu-dominio.com/...),
+     URL relativa não funciona fora do próprio site. A imagem abaixo é um SVG de placeholder — WhatsApp e Instagram
+     nem sempre renderizam SVG em preview, então troque por um .png/.jpg de 1200x630 assim que tiver hospedagem real. -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="O Abridor — Empresa Júnior FGV">
+<meta property="og:description" content="Alumínio aeronáutico 6061, cordão de 250kg, garantia vitalícia. O abridor feito pra sobreviver a você.">
+<meta property="og:image" content="assets/og-image.svg">
+<meta property="og:url" content="https://SEU-DOMINIO-AQUI.com.br/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="O Abridor — Empresa Júnior FGV">
+<meta name="twitter:description" content="Alumínio aeronáutico 6061, cordão de 250kg, garantia vitalícia.">
+<meta name="twitter:image" content="assets/og-image.svg">
+
+<!-- EJ DATA KIT — módulo reutilizável (ver assets/ej-data-kit.js). Isso aqui embaixo
+     é a ÚNICA parte que muda de cliente pra cliente: os textos abaixo têm o tom
+     brincalhão deste produto de campus; num site institucional de uma PME, troca-se
+     só esses valores (whatsapp.message, exitIntent.*, chat.systemPrompt) — a lógica
+     do kit é a mesma nos dois casos. -->
+<script>
+  window.EJ_CONFIG = {
+    project: 'abridor-fgv',
+    webhookUrl: '', // ex.: 'https://hooks.zapier.com/hooks/catch/xxxxx/yyyyy/'
+    whatsapp: {
+      phone: '5511999999999', // SEU-NUMERO-AQUI, formato internacional sem símbolos
+      message: 'Olá! Vi o abridor no site e queria tirar uma dúvida.'
+    },
+    exitIntent: {
+      title: 'Espera aí!',
+      body: 'Deixa seu contato e ganhe 10% a mais de desconto na sua reserva.',
+      discountLabel: '10% OFF'
+    },
+    chat: {
+      label: 'Fale com o Abridor',
+      systemPrompt: 'Você é o assistente virtual do site "O Abridor", produto oficial da Empresa Júnior FGV: um abridor de garrafas em chaveiro, feito em alumínio aeronáutico grau 6061, cordão em paracord trançado (ruptura testada a 250kg), gravação a laser, garantia vitalícia, preço R$ 79,90 no Pix ou 3x de R$ 29,97. Responda em português, em tom leve e direto, sempre incentivando a pessoa a fazer a pré-reserva no site. Se não souber algo, diga que a pessoa pode perguntar pelo WhatsApp.'
+    }
+  };
+</script>
+<script src="assets/ej-data-kit.js"></script>
+
+<!-- CAMADA DE RASTREAMENTO — cole seus IDs abaixo e recarregue a página. Nada dispara
+     enquanto os campos estiverem vazios (zero requisição de rede à toa). Assim que
+     ga4Id/clarityId/metaPixelId existirem, os eventos que o site já dispara
+     (InitiateCheckout/begin_checkout ao abrir o checkout, Lead/generate_lead ao
+     confirmar) passam a ser recebidos automaticamente — não precisa mexer em
+     mais nada do código.
+
+     Onde conseguir cada ID:
+     - GA4:         analytics.google.com → Admin → Fluxos de dados → seu ID começa com "G-"
+     - MS Clarity:  clarity.microsoft.com → criar projeto → Configurações → Instalação
+                    (Clarity é o que te dá MAPA DE CALOR e gravação de sessão — GA4 sozinho não tem isso)
+     - Meta Pixel:  business.facebook.com → Gerenciador de Eventos → seu ID é só números -->
+<script>
+  window.EJ_ANALYTICS = {
+    ga4Id: '',       // ex.: 'G-XXXXXXXXXX'
+    clarityId: '',   // ex.: 'abcd1234ef'
+    metaPixelId: ''  // ex.: '1234567890123'
+  };
+</script>
+<script>
+(function(){
+  var cfg = window.EJ_ANALYTICS || {};
+
+  if(cfg.ga4Id){
+    var g = document.createElement('script');
+    g.async = true;
+    g.src = 'https://www.googletagmanager.com/gtag/js?id=' + cfg.ga4Id;
+    document.head.appendChild(g);
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function(){ dataLayer.push(arguments); };
+    gtag('js', new Date());
+    gtag('config', cfg.ga4Id);
+  }
+
+  if(cfg.clarityId){
+    (function(c,l,a,r,i,t,y){
+      c[a] = c[a] || function(){ (c[a].q = c[a].q || []).push(arguments); };
+      t = l.createElement(r); t.async = 1; t.src = 'https://www.clarity.ms/tag/' + i;
+      y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+    })(window, document, 'clarity', 'script', cfg.clarityId);
+  }
+
+  if(cfg.metaPixelId){
+    (function(f,b,e,v,n,t,s){
+      if(f.fbq) return; n = f.fbq = function(){ n.callMethod ? n.callMethod.apply(n,arguments) : n.queue.push(arguments); };
+      if(!f._fbq) f._fbq = n; n.push = n; n.loaded = true; n.version = '2.0'; n.queue = [];
+      t = b.createElement(e); t.async = true; t.src = v;
+      s = b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t, s);
+    })(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', cfg.metaPixelId);
+    fbq('track', 'PageView');
+  }
+})();
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800;900&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* tokens herdados do sistema Ember */
+    --ash-50:#FAF8F5; --ash-100:#F1ECE5; --ash-200:#E4DCD0; --ash-300:#CFC3B2;
+    --ash-400:#A79A87; --ash-500:#857767; --ash-600:#6B5F52; --ash-700:#524940;
+    --ash-800:#38322C; --ash-900:#211D19; --ink:#17130F;
+    --ember-50:#FDF1E9; --ember-100:#FBDFC9; --ember-200:#F7BE93; --ember-300:#F2985D;
+    --ember-400:#EC7530; --ember-500:#E8560E; --ember-600:#C7440A; --ember-700:#9C3609;
+    --ember-rgb:232,86,14;
+    --success:#3F8452; --success-bg:#E7F3E9;
+    --canvas:var(--ash-100); --paper:var(--ash-50); --line:var(--ash-300);
+    --font-sans:'Geist', -apple-system, 'Segoe UI', sans-serif;
+    --font-mono:'Geist Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+    --sp-3:12px; --sp-4:16px; --sp-5:24px; --sp-6:32px; --sp-7:48px; --sp-8:64px; --sp-9:96px;
+    --r-sm:8px; --r-md:14px; --r-lg:22px; --r-full:999px;
+    --ease-out:cubic-bezier(.22,1,.36,1); --ease-spring:cubic-bezier(.34,1.56,.64,1);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0; background:var(--canvas); color:var(--ink); font-family:var(--font-sans); line-height:1.55; -webkit-font-smoothing:antialiased; overflow-x:hidden;}
+  h1,h2,h3{margin:0; text-wrap:balance;}
+  p{margin:0;}
+  ::selection{background:var(--ember-500); color:var(--ash-50);}
+  a{color:inherit;}
+  :focus-visible{outline:2px solid var(--ember-500); outline-offset:3px;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 var(--sp-6); position:relative; z-index:1;}
+  @media (max-width:720px){ .wrap{padding:0 var(--sp-4);} }
+  .eyebrow{font-family:var(--font-mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--ash-500);}
+  .eyebrow.on-dark{color:var(--ash-400);}
+
+  /* fundo ambiente animado — do sistema Ember */
+  .ambient{position:absolute; inset:0; overflow:hidden; z-index:0; pointer-events:none;}
+  .ambient::before,.ambient::after{content:''; position:absolute; border-radius:50%; filter:blur(90px);}
+  .ambient.dark::before{background:var(--ember-500); opacity:.16; width:52vw; height:52vw; max-width:620px; max-height:620px; top:-16%; left:-8%; animation:driftA 26s ease-in-out infinite alternate;}
+  .ambient.dark::after{background:var(--ember-700); opacity:.22; width:36vw; height:36vw; max-width:420px; max-height:420px; bottom:-18%; right:-4%; animation:driftB 32s ease-in-out infinite alternate;}
+  .ambient.light::before{background:var(--ember-300); opacity:.16; width:44vw; height:44vw; max-width:520px; max-height:520px; top:-14%; right:-6%; animation:driftB 30s ease-in-out infinite alternate;}
+  .ambient.light::after{background:var(--ash-400); opacity:.16; width:30vw; height:30vw; max-width:360px; max-height:360px; bottom:-14%; left:2%; animation:driftA 24s ease-in-out infinite alternate;}
+  @keyframes driftA{ from{transform:translate(0,0) scale(1);} to{transform:translate(8%,10%) scale(1.16);} }
+  @keyframes driftB{ from{transform:translate(0,0) scale(1);} to{transform:translate(-9%,-8%) scale(1.1);} }
+
+  /* ── header ── */
+  header{position:sticky; top:0; z-index:40; background:rgba(250,248,245,.85); backdrop-filter:blur(8px); border-bottom:1px solid var(--line);}
+  .headbar{display:flex; align-items:center; justify-content:space-between; padding:var(--sp-4) 0;}
+  .mark{display:flex; align-items:center; gap:10px;}
+  .mark-glyph{width:20px; height:20px; color:var(--ember-500); transition:transform .7s var(--ease-out);}
+  .mark:hover .mark-glyph{transform:rotate(160deg);}
+  .mark b{font-weight:800; font-size:16px; letter-spacing:-.01em;}
+  .mark span{font-family:var(--font-mono); font-size:10px; color:var(--ash-500);}
+  .head-cta{font-family:var(--font-sans); font-weight:600; font-size:13px; background:var(--ember-500); color:var(--ash-50); border:none; border-radius:var(--r-full); padding:9px 18px; cursor:pointer; transition:transform .15s var(--ease-out), background .2s;}
+  .head-cta:hover{background:var(--ember-600); transform:translateY(-1px);}
+
+  /* ── marquee ── */
+  .marquee{position:relative; overflow:hidden; padding:11px 0; background:var(--ash-900); border-bottom:1px solid var(--ash-800); z-index:1;}
+  .marquee-track{display:flex; gap:36px; white-space:nowrap; width:max-content; animation:marquee 24s linear infinite;}
+  .marquee-track span{font-family:var(--font-mono); font-size:11px; text-transform:uppercase; letter-spacing:.14em; color:var(--ash-300);}
+  .marquee-track span.hot{color:var(--ember-400);}
+  @keyframes marquee{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
+
+  /* ── revelação ao rolar ── */
+  .reveal{transition:opacity .8s var(--ease-out), transform .8s var(--ease-out); opacity:0; transform:translateY(24px);}
+  .reveal.is-visible{opacity:1; transform:translateY(0);}
+  .stagger > *{transition:opacity .7s var(--ease-out), transform .7s var(--ease-out); opacity:0; transform:translateY(16px);}
+  .stagger.is-visible > *{opacity:1; transform:translateY(0);}
+  .stagger > *:nth-child(1){transition-delay:.02s} .stagger > *:nth-child(2){transition-delay:.10s}
+  .stagger > *:nth-child(3){transition-delay:.18s} .stagger > *:nth-child(4){transition-delay:.26s}
+  .stagger > *:nth-child(5){transition-delay:.34s} .stagger > *:nth-child(6){transition-delay:.42s}
+
+  /* ── botões ── */
+  .btn{font-family:var(--font-sans); font-weight:700; font-size:14.5px; letter-spacing:.01em; border-radius:var(--r-md); padding:15px 26px; border:1px solid transparent; cursor:pointer; transition:transform .15s var(--ease-out), background .2s, box-shadow .2s; text-transform:uppercase;}
+  .btn:hover{transform:translateY(-2px);}
+  .btn:active{transform:translateY(0) scale(.97); transition-duration:80ms;}
+  .btn-primary{background:var(--ember-500); color:var(--ash-50);}
+  .btn-primary:hover{background:var(--ember-600); box-shadow:0 14px 30px -12px rgba(var(--ember-rgb),.6);}
+  .btn-outline-dark{background:transparent; border-color:rgba(250,248,245,.35); color:var(--ash-50);}
+  .btn-outline-dark:hover{border-color:var(--ash-50); background:rgba(250,248,245,.06);}
+  .btn-outline-light{background:transparent; border-color:var(--ash-400); color:var(--ink);}
+  .btn-outline-light:hover{border-color:var(--ink);}
+
+  .pill{font-family:var(--font-mono); font-size:11px; border-radius:var(--r-full); padding:5px 12px; display:inline-flex; align-items:center; gap:7px;}
+  .pill-status{background:var(--success-bg); color:var(--success); border:1px solid #cfe6d4;}
+  .pulse{position:relative; width:7px; height:7px; border-radius:50%; background:var(--success);}
+  .pulse::before{content:''; position:absolute; inset:0; border-radius:50%; background:var(--success); animation:ping 1.8s cubic-bezier(0,0,.2,1) infinite;}
+  @keyframes ping{ 75%,100%{transform:scale(2.4); opacity:0;} }
+
+  /* ── hero ── */
+  .hero{position:relative; background:var(--ash-900); color:var(--ash-50); overflow:hidden; padding:var(--sp-8) 0 var(--sp-9);}
+  .hero-grid{display:grid; grid-template-columns:1.05fr .95fr; gap:var(--sp-8); align-items:center;}
+  @media (max-width:920px){ .hero-grid{grid-template-columns:1fr;} }
+  .hero h1{font-weight:900; font-size:clamp(38px,6vw,72px); line-height:1.01; letter-spacing:-.03em; margin:var(--sp-4) 0 var(--sp-5);}
+  .hero h1 .hot{color:var(--ember-500);}
+  .hero p.sub{max-width:52ch; font-size:17px; color:var(--ash-300); line-height:1.65;}
+  .hero-actions{display:flex; flex-wrap:wrap; gap:var(--sp-3); margin-top:var(--sp-7);}
+  .hero-badges{display:flex; flex-wrap:wrap; gap:var(--sp-4); margin-top:var(--sp-6); font-family:var(--font-mono); font-size:11.5px; color:var(--ash-400);}
+  .hero-badges b{color:var(--ash-50); font-weight:500;}
+
+  .video-frame{position:relative; border-radius:var(--r-lg); overflow:hidden; border:1px solid rgba(250,248,245,.14); background:var(--ash-800); aspect-ratio:1/1; box-shadow:0 50px 90px -40px rgba(0,0,0,.6);}
+  .video-frame video{width:100%; height:100%; object-fit:cover; display:block;}
+  .video-tag{position:absolute; top:14px; left:14px; z-index:2;}
+  .video-frame::after{content:''; position:absolute; inset:0; box-shadow:inset 0 0 0 1px rgba(255,255,255,.06); border-radius:inherit; pointer-events:none;}
+
+  /* ── seções claras ── */
+  section{position:relative; padding:var(--sp-9) 0; overflow:hidden;}
+  .section-light{background:var(--paper); border-bottom:1px solid var(--line);}
+  .section-canvas{background:var(--canvas); border-bottom:1px solid var(--line);}
+  .kicker{font-weight:900; font-size:clamp(28px,4vw,44px); letter-spacing:-.02em; max-width:18ch; margin-bottom:var(--sp-7);}
+
+  .feat-list{display:flex; flex-direction:column;}
+  .feat-row{display:grid; grid-template-columns:64px 1fr; gap:var(--sp-5); padding:var(--sp-6) 0; border-top:1px solid var(--line); align-items:flex-start; transition:padding-left .4s var(--ease-out);}
+  .feat-row:first-child{border-top:none;}
+  .feat-row:hover{padding-left:10px;}
+  .feat-icon{width:52px; height:52px; border-radius:var(--r-md); background:var(--ember-50); color:var(--ember-600); display:flex; align-items:center; justify-content:center; flex-shrink:0;}
+  .feat-icon svg{width:24px; height:24px;}
+  .feat-row h3{font-size:19px; font-weight:700; margin-bottom:8px;}
+  .feat-row p{font-size:15px; color:var(--ash-700); max-width:64ch; line-height:1.65;}
+
+  /* ── ficha técnica ── */
+  .spec-wrap{overflow-x:auto; border:1px solid var(--line); border-radius:var(--r-sm); background:var(--paper);}
+  table.spec{width:100%; border-collapse:collapse; font-size:14px; min-width:520px;}
+  table.spec th{font-family:var(--font-mono); font-size:10px; text-transform:uppercase; letter-spacing:.06em; color:var(--ash-600); text-align:left; padding:12px 18px; background:var(--ash-200); border-bottom:1px solid var(--line);}
+  table.spec td{padding:14px 18px; border-bottom:1px solid var(--line); vertical-align:top;}
+  table.spec tr:last-child td{border-bottom:none;}
+  table.spec tbody tr{transition:background .25s;}
+  table.spec tbody tr:hover{background:var(--ember-50);}
+  table.spec td:first-child{font-family:var(--font-mono); font-size:11px; text-transform:uppercase; letter-spacing:.05em; color:var(--ash-500); white-space:nowrap; width:160px;}
+
+  /* ── prova social ── */
+  .stat-row{display:grid; grid-template-columns:repeat(3,1fr); gap:var(--sp-6);}
+  @media (max-width:760px){ .stat-row{grid-template-columns:1fr;} }
+  .stat{border:1px solid var(--line); border-radius:var(--r-md); background:var(--paper); padding:var(--sp-6); text-align:center;}
+  .stat b{display:block; font-weight:900; font-size:52px; letter-spacing:-.02em; line-height:1;}
+  .stat b .hot{color:var(--ember-500);}
+  .stat span{font-family:var(--font-mono); font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:var(--ash-600); margin-top:8px; display:block;}
+  .proof-quote{font-size:19px; color:var(--ash-800); max-width:70ch; margin:var(--sp-7) 0; line-height:1.6;}
+  .proof-still{display:inline-flex; margin-top:var(--sp-2);}
+
+  /* ── cta final ── */
+  .cta-final{background:var(--ash-900); color:var(--ash-50); text-align:center; padding:var(--sp-9) 0;}
+  .cta-final h2{font-weight:900; font-size:clamp(32px,5.5vw,58px); letter-spacing:-.025em; max-width:16ch; margin:0 auto var(--sp-7);}
+  .foot-word{position:absolute; bottom:-6%; left:0; right:0; text-align:center; font-weight:900; font-size:clamp(70px,16vw,220px); letter-spacing:-.04em; line-height:1; color:rgba(250,248,245,.05); white-space:nowrap; user-select:none; z-index:0;}
+
+  footer{background:var(--ash-900); color:var(--ash-500); border-top:1px solid var(--ash-800); padding:var(--sp-6) 0;}
+  .foot-row{display:flex; flex-wrap:wrap; justify-content:space-between; gap:var(--sp-4); font-family:var(--font-mono); font-size:11px;}
+
+  /* ── modal / lightbox de vídeo ── */
+  .modal-overlay{position:fixed; inset:0; background:rgba(23,19,15,.7); backdrop-filter:blur(6px); display:flex; align-items:center; justify-content:center; z-index:100; opacity:0; pointer-events:none; transition:opacity .3s var(--ease-out); padding:var(--sp-5);}
+  .modal-overlay.open{opacity:1; pointer-events:auto;}
+  .modal-panel{width:min(520px,92vw); background:var(--ash-900); border:1px solid rgba(250,248,245,.14); border-radius:var(--r-lg); overflow:hidden; transform:scale(.92) translateY(10px); opacity:0; transition:transform .6s var(--ease-spring), opacity .3s var(--ease-out);}
+  .modal-overlay.open .modal-panel{transform:scale(1) translateY(0); opacity:1;}
+  .modal-panel video{width:100%; display:block; aspect-ratio:1/1; object-fit:cover;}
+  .modal-head{display:flex; align-items:center; justify-content:space-between; padding:var(--sp-4) var(--sp-5);}
+  .modal-head span{font-family:var(--font-mono); font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:var(--ash-400);}
+  .modal-close{background:none; border:none; color:var(--ash-300); font-size:18px; cursor:pointer; line-height:1;}
+  .modal-close:hover{color:var(--ash-50);}
+
+  /* ── preço ── */
+  .price-block{display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; margin-top:var(--sp-6);}
+  .price-now{font-weight:800; font-size:32px; letter-spacing:-.02em;}
+  .price-now .hot{color:var(--ember-500);}
+  .price-old{font-family:var(--font-mono); font-size:14px; color:var(--ash-500); text-decoration:line-through;}
+  .price-note{font-family:var(--font-mono); font-size:11.5px; color:var(--ash-400); width:100%;}
+  .price-note.on-light{color:var(--ash-600);}
+  .pay-icons{display:flex; gap:8px; margin-top:10px;}
+  .pay-icons span{font-family:var(--font-mono); font-size:10px; border:1px solid rgba(250,248,245,.25); color:var(--ash-300); border-radius:6px; padding:3px 8px;}
+  .pay-icons.on-light span{border-color:var(--ash-300); color:var(--ash-600);}
+  .stock-note{font-family:var(--font-mono); font-size:11px; color:var(--ash-400); margin-top:14px; display:flex; align-items:center; gap:8px;}
+  .stock-bar{width:120px; height:4px; border-radius:var(--r-full); background:rgba(250,248,245,.15); overflow:hidden;}
+  .stock-bar i{display:block; height:100%; width:24%; background:var(--ember-500); border-radius:var(--r-full);}
+
+  /* ── barra fixa (mobile) ── */
+  .sticky-bar{position:fixed; left:0; right:0; bottom:0; z-index:50; background:var(--ash-900); border-top:1px solid var(--ash-800); padding:12px var(--sp-4); display:flex; align-items:center; justify-content:space-between; gap:var(--sp-4); transform:translateY(110%); transition:transform .4s var(--ease-out); box-shadow:0 -20px 40px -20px rgba(0,0,0,.4);}
+  .sticky-bar.show{transform:translateY(0);}
+  .sticky-bar .p{color:var(--ash-50); font-weight:800; font-size:17px;}
+  .sticky-bar .p small{display:block; font-family:var(--font-mono); font-weight:400; font-size:10px; color:var(--ash-400); text-transform:none; letter-spacing:0;}
+  .sticky-bar .btn{padding:11px 20px; font-size:12.5px; white-space:nowrap;}
+  @media (min-width:761px){ .sticky-bar{display:none;} }
+
+  /* ── FAQ ── */
+  .faq{border-top:1px solid var(--line);}
+  .faq details{border-bottom:1px solid var(--line);}
+  .faq summary{list-style:none; cursor:pointer; padding:var(--sp-5) 0; display:flex; align-items:center; justify-content:space-between; gap:var(--sp-4); font-weight:700; font-size:16px;}
+  .faq summary::-webkit-details-marker{display:none;}
+  .faq summary .plus{flex-shrink:0; width:22px; height:22px; border-radius:50%; border:1px solid var(--ash-400); display:flex; align-items:center; justify-content:center; transition:transform .3s var(--ease-out), background .2s;}
+  .faq summary .plus svg{width:11px; height:11px; transition:transform .3s var(--ease-out);}
+  .faq details[open] summary .plus{background:var(--ember-500); border-color:var(--ember-500); color:var(--ash-50);}
+  .faq details[open] summary .plus svg{transform:rotate(45deg);}
+  .faq summary:hover .plus{border-color:var(--ember-500);}
+  .faq .faq-a{padding:0 0 var(--sp-5); font-size:14.5px; color:var(--ash-700); max-width:68ch; line-height:1.65;}
+
+  /* ── modal de reserva (checkout) ── */
+  .checkout-panel{padding:var(--sp-6);}
+  .checkout-panel .price-recap{font-family:var(--font-mono); font-size:12px; color:var(--ash-400); margin-bottom:var(--sp-5); padding-bottom:var(--sp-4); border-bottom:1px solid rgba(250,248,245,.12);}
+  .checkout-panel .price-recap b{color:var(--ash-50); font-family:var(--font-sans); font-size:16px;}
+  .co-field{display:flex; flex-direction:column; gap:6px; margin-bottom:var(--sp-4);}
+  .co-field label{font-family:var(--font-mono); font-size:10.5px; text-transform:uppercase; letter-spacing:.06em; color:var(--ash-400);}
+  .co-field input{font-family:var(--font-sans); font-size:14px; padding:11px 13px; border:1px solid rgba(250,248,245,.2); border-radius:var(--r-md); background:rgba(250,248,245,.05); color:var(--ash-50); transition:border-color .25s, box-shadow .25s;}
+  .co-field input::placeholder{color:var(--ash-500);}
+  .co-field input:focus{outline:none; border-color:var(--ember-500); box-shadow:0 0 0 4px rgba(var(--ember-rgb),.2);}
+  .co-field.error input{border-color:#e06a52;}
+  .co-field .err-msg{font-size:11.5px; color:#e06a52; display:none;}
+  .co-field.error .err-msg{display:block;}
+  .checkout-panel .btn-primary{width:100%; margin-top:6px;}
+  .checkout-success{padding:var(--sp-8) var(--sp-6); text-align:center;}
+  .checkout-success .ok-circle{width:56px; height:56px; border-radius:50%; background:var(--success); color:var(--ash-50); display:flex; align-items:center; justify-content:center; margin:0 auto var(--sp-5); transform:scale(0); animation:pop .5s var(--ease-spring) forwards;}
+  @keyframes pop{ to{transform:scale(1);} }
+  .checkout-success .ok-circle svg{width:26px; height:26px;}
+  .checkout-success h3{font-size:20px; margin-bottom:8px;}
+  .checkout-success p{font-size:14px; color:var(--ash-400);}
+  .checkout-success .ref{font-family:var(--font-mono); font-size:12px; color:var(--ember-400); margin-top:var(--sp-4); display:block;}
+  .co-loading{opacity:.6; pointer-events:none;}
+
+  /* ── botão flutuante de WhatsApp ── */
+  .wa-float{position:fixed; right:20px; bottom:20px; z-index:60; width:56px; height:56px; border-radius:50%; background:#25D366; color:#fff; display:flex; align-items:center; justify-content:center; box-shadow:0 12px 28px -8px rgba(0,0,0,.4); transition:transform .2s var(--ease-out); text-decoration:none;}
+  .wa-float:hover{transform:scale(1.08);}
+  .wa-float svg{width:28px; height:28px;}
+  @media (max-width:760px){ .wa-float{bottom:84px;} } /* não cobre a barra fixa mobile */
+
+  /* ── banner de consentimento (LGPD) ── */
+  .consent-banner{position:fixed; left:0; right:0; bottom:0; z-index:70; background:var(--ash-900); color:var(--ash-200); padding:var(--sp-4) var(--sp-5); display:flex; flex-wrap:wrap; gap:var(--sp-4); align-items:center; justify-content:space-between; transform:translateY(110%); transition:transform .5s var(--ease-out); border-top:1px solid var(--ash-800);}
+  .consent-banner.show{transform:translateY(0);}
+  .consent-banner p{font-size:12.5px; max-width:60ch; line-height:1.55;}
+  .consent-banner .actions{display:flex; gap:10px; flex-shrink:0;}
+  .consent-banner button{font-family:var(--font-sans); font-size:12.5px; font-weight:600; border-radius:var(--r-sm); padding:9px 16px; cursor:pointer; border:1px solid transparent;}
+  .consent-accept{background:var(--ember-500); color:var(--ash-50);}
+  .consent-accept:hover{background:var(--ember-600);}
+  .consent-reject{background:transparent; border-color:rgba(250,248,245,.3); color:var(--ash-300);}
+
+  /* ── exit intent ── */
+  .exit-panel{padding:var(--sp-7) var(--sp-6); text-align:center;}
+  .exit-panel .discount-tag{display:inline-block; background:var(--ember-500); color:var(--ash-50); font-family:var(--font-mono); font-size:12px; font-weight:700; border-radius:var(--r-full); padding:6px 16px; margin-bottom:var(--sp-4);}
+  .exit-panel h3{font-size:24px; margin-bottom:10px;}
+  .exit-panel p{font-size:14.5px; color:var(--ash-400); margin-bottom:var(--sp-5);}
+
+  /* ── chatbot ── */
+  .chat-toggle{position:fixed; right:20px; bottom:86px; z-index:59; background:var(--ember-500); color:var(--ash-50); border:none; border-radius:var(--r-full); padding:12px 18px 12px 14px; display:flex; align-items:center; gap:8px; font-family:var(--font-sans); font-weight:700; font-size:13px; cursor:pointer; box-shadow:0 12px 28px -8px rgba(var(--ember-rgb),.5); transition:transform .2s var(--ease-out);}
+  .chat-toggle:hover{transform:scale(1.04);}
+  .chat-toggle svg{width:18px; height:18px;}
+  @media (max-width:760px){ .chat-toggle{bottom:150px;} }
+  .chat-panel{position:fixed; right:20px; bottom:150px; z-index:61; width:320px; max-width:88vw; height:420px; background:var(--ash-900); border:1px solid rgba(250,248,245,.14); border-radius:var(--r-lg); box-shadow:0 30px 60px -20px rgba(0,0,0,.5); display:flex; flex-direction:column; overflow:hidden; transform:translateY(16px) scale(.96); opacity:0; pointer-events:none; transition:transform .35s var(--ease-spring), opacity .25s var(--ease-out);}
+  .chat-panel.open{transform:translateY(0) scale(1); opacity:1; pointer-events:auto;}
+  @media (max-width:760px){ .chat-panel{bottom:210px;} }
+  .chat-head{display:flex; align-items:center; justify-content:space-between; padding:var(--sp-4); border-bottom:1px solid rgba(250,248,245,.1);}
+  .chat-head span{font-family:var(--font-mono); font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:var(--ash-400);}
+  .chat-body{flex:1; overflow-y:auto; padding:var(--sp-4); display:flex; flex-direction:column; gap:10px;}
+  .chat-msg{max-width:85%; padding:9px 12px; border-radius:var(--r-md); font-size:13.5px; line-height:1.5;}
+  .chat-msg.bot{background:rgba(250,248,245,.08); color:var(--ash-100); align-self:flex-start; border-bottom-left-radius:4px;}
+  .chat-msg.user{background:var(--ember-500); color:var(--ash-50); align-self:flex-end; border-bottom-right-radius:4px;}
+  .chat-foot{display:flex; gap:8px; padding:var(--sp-3); border-top:1px solid rgba(250,248,245,.1);}
+  .chat-foot input{flex:1; background:rgba(250,248,245,.06); border:1px solid rgba(250,248,245,.15); border-radius:var(--r-md); padding:9px 11px; color:var(--ash-50); font-family:var(--font-sans); font-size:13px;}
+  .chat-foot input:focus{outline:none; border-color:var(--ember-500);}
+  .chat-foot button{background:var(--ember-500); color:var(--ash-50); border:none; border-radius:var(--r-md); width:38px; flex-shrink:0; cursor:pointer;}
+  .chat-foot button:hover{background:var(--ember-600);}
+  .chat-note{font-family:var(--font-mono); font-size:9.5px; color:var(--ash-500); text-align:center; padding:6px 0 10px;}
+
+  /* ── indicação (pós-compra) ── */
+  .referral-box{margin-top:var(--sp-5); background:rgba(250,248,245,.06); border:1px solid rgba(250,248,245,.12); border-radius:var(--r-md); padding:var(--sp-4); text-align:left;}
+  .referral-box p{font-size:12.5px; color:var(--ash-400); margin-bottom:8px;}
+  .referral-row{display:flex; gap:8px;}
+  .referral-row input{flex:1; background:rgba(250,248,245,.05); border:1px solid rgba(250,248,245,.15); border-radius:var(--r-sm); padding:8px 10px; color:var(--ash-200); font-family:var(--font-mono); font-size:11px;}
+  .referral-row button{background:var(--ember-500); color:var(--ash-50); border:none; border-radius:var(--r-sm); padding:0 14px; font-size:12px; font-weight:600; cursor:pointer; white-space:nowrap;}
+  .referral-row button:hover{background:var(--ember-600);}
+
+  @media (prefers-reduced-motion: reduce){
+    .marquee-track, .ambient::before, .ambient::after, .pulse::before{animation:none;}
+    .reveal, .stagger > *{opacity:1; transform:none;}
+    .sticky-bar, .consent-banner, .chat-panel{transition:none;}
+    .checkout-success .ok-circle{animation:none; transform:scale(1);}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap headbar">
+    <div class="mark">
+      <svg class="mark-glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2c-1 3-4 4.5-4 8a4 4 0 0 0 8 0c0-1.2-.4-2-1-2.8.5 2-.6 3-1.4 3-1 0-1.3-.8-1-1.6.6-1.6.4-3.6-.6-6.6Z"/><path d="M8.5 15.5A5 5 0 0 0 12 21a5 5 0 0 0 3.5-5.5"/></svg>
+      <div><b>O ABRIDOR</b><br><span>Empresa Júnior FGV</span></div>
+    </div>
+    <button class="head-cta" onclick="openCheckout()">Quero o meu — R$ 79,90</button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="ambient dark"></div>
+  <div class="wrap hero-grid">
+    <div class="reveal is-visible">
+      <span class="eyebrow on-dark">Edição oficial · alumínio aeronáutico 6061</span>
+      <h1>O ABRIDOR QUE VAI <span class="hot">SOBREVIVER</span> A VOCÊ.</h1>
+      <p class="sub">Forjado em alumínio aeronáutico grau 6061, o mesmo usado em trem de pouso de avião, o abridor oficial da Empresa Júnior FGV foi projetado pra abrir a última cerveja da sua vida. Literalmente. Garantia vitalícia.</p>
+      <div class="price-block">
+        <span class="price-now">R$ 79<span class="hot">,90</span></span>
+        <span class="price-old">R$ 129,90</span>
+        <span class="price-note">no Pix · ou 3x de R$ 29,97 sem juros no cartão</span>
+      </div>
+      <div class="hero-actions" style="margin-top:var(--sp-5);">
+        <button class="btn btn-primary" onclick="openCheckout()">Quero o meu</button>
+        <button class="btn btn-outline-dark" id="openDemo">Ver demonstração</button>
+      </div>
+      <div class="pay-icons">
+        <span>PIX</span><span>CRÉDITO</span><span>3X SEM JUROS</span>
+      </div>
+      <div class="stock-note"><span class="stock-bar"><i></i></span>Restam 47 de 200 unidades do lote atual</div>
+      <div class="hero-badges">
+        <span><b>6061</b> alumínio aeronáutico</span>
+        <span><b>250kg</b> ruptura do cordão</span>
+        <span><b>vitalícia</b> garantia</span>
+      </div>
+    </div>
+    <div class="reveal is-visible" style="transition-delay:.15s">
+      <div class="video-frame">
+        <span class="pill pill-status video-tag"><span class="pulse"></span>360° · sem cortes</span>
+        <video autoplay muted loop playsinline aria-label="Abridor girando em 360 graus">
+          <source src="assets/opener-rotating.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee">
+  <div class="marquee-track">
+    <span class="hot">ALUMÍNIO AERONÁUTICO 6061</span><span>·</span><span>GARANTIA VITALÍCIA</span><span>·</span><span class="hot">50.000+ ABERTURAS TESTADAS</span><span>·</span><span>CORDÃO DE 250KG</span><span>·</span><span class="hot">ABRE QUALQUER TAMPA</span><span>·</span>
+    <span class="hot">ALUMÍNIO AERONÁUTICO 6061</span><span>·</span><span>GARANTIA VITALÍCIA</span><span>·</span><span class="hot">50.000+ ABERTURAS TESTADAS</span><span>·</span><span>CORDÃO DE 250KG</span><span>·</span><span class="hot">ABRE QUALQUER TAMPA</span><span>·</span>
+  </div>
+</div>
+
+<section class="section-light">
+  <div class="ambient light"></div>
+  <div class="wrap reveal">
+    <span class="eyebrow">Engenharia, não bijuteria</span>
+    <h2 class="kicker" style="margin-top:14px;">Não é só um chaveiro. É um instrumento de precisão.</h2>
+
+    <div class="feat-list stagger">
+      <div class="feat-row">
+        <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+        <div><h3>Bloco único, sem solda</h3><p>Usinado em bloco único de metal, sem soldas, sem pontos fracos, sem chance de quebrar. Testado em mais de 50 mil aberturas em laboratório interno e ainda não encontramos o limite.</p></div>
+      </div>
+      <div class="feat-row">
+        <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 21l4.3-1.4L20 7a2 2 0 0 0-3-3L4.4 16.7z"/></svg></div>
+        <div><h3>Gravação que não sai</h3><p>A gravação a laser não desbota, não risca, não sai no bolso, na mochila, na lavagem por engano da calça. Ela é parte do metal, não uma etiqueta em cima dele.</p></div>
+      </div>
+      <div class="feat-row">
+        <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v6M12 21v-6M7 9a5 5 0 0 1 10 0c0 3-5 3-5 6a5 5 0 0 0 5 6"/></svg></div>
+        <div><h3>Paracord grau militar</h3><p>O cordão em paracord trançado suporta até 250kg de tração, o mesmo usado em equipamento militar de rapel. Você pode pendurar seu molho de chaves inteiro nele que ele nem vai sentir.</p></div>
+      </div>
+      <div class="feat-row">
+        <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9 12h6M12 9v6"/></svg></div>
+        <div><h3>Abre qualquer tampa</h3><p>Testado em tampas de vidro grosso, tampas amassadas, tampas enferrujadas de garrafa esquecida no fundo da geladeira. Se tem uma tampa, esse abridor abre.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-canvas">
+  <div class="wrap reveal">
+    <span class="eyebrow">Ficha técnica</span>
+    <h2 class="kicker" style="margin-top:14px; max-width:24ch;">Os números por trás do exagero.</h2>
+    <div class="spec-wrap">
+      <table class="spec">
+        <tbody>
+          <tr><td>Material</td><td>Alumínio aeronáutico grau 6061 — o mesmo do trem de pouso de avião</td></tr>
+          <tr><td>Processo</td><td>Usinado em bloco único — zero solda, zero ponto fraco</td></tr>
+          <tr><td>Cordão</td><td>Paracord trançado, grau militar — ruptura testada a 250kg de tração</td></tr>
+          <tr><td>Testes</td><td>50.000+ aberturas em laboratório interno, sem encontrar o limite</td></tr>
+          <tr><td>Gravação</td><td>A laser, incorporada ao metal — não desbota, não risca, não sai</td></tr>
+          <tr><td>Garantia</td><td>Vitalícia</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="section-light">
+  <div class="ambient light"></div>
+  <div class="wrap reveal">
+    <span class="eyebrow">Prova social (exagerada, mas real)</span>
+    <p class="proof-quote" style="margin-top:14px;">Usado por mais de 12 mil universitários, testado em 4 continentes, sobreviveu a duas máquinas de lavar e uma queda de terceiro andar.</p>
+    <div class="stat-row stagger">
+      <div class="stat"><b>12<span class="hot">mil+</span></b><span>Universitários</span></div>
+      <div class="stat"><b class="hot">4</b><span>Continentes testados</span></div>
+      <div class="stat"><b>2<span class="hot">x</span></b><span>Máquinas de lavar sobrevividas</span></div>
+    </div>
+    <span class="pill pill-status proof-still"><span class="pulse"></span>Ainda funciona perfeitamente</span>
+  </div>
+</section>
+
+<section class="section-canvas">
+  <div class="wrap reveal">
+    <span class="eyebrow">Perguntas frequentes</span>
+    <h2 class="kicker" style="margin-top:14px; max-width:22ch;">Antes de perguntar no direct.</h2>
+    <div class="faq">
+      <details>
+        <summary>Qual o prazo de entrega?<span class="plus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+        <div class="faq-a">Pedidos fechados até sexta-feira são despachados na semana seguinte, direto do campus. Fora de São Paulo, o prazo pode variar conforme os Correios.</div>
+      </details>
+      <details>
+        <summary>Como funciona a garantia vitalícia?<span class="plus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+        <div class="faq-a">Quebrou, mande uma foto pro nosso WhatsApp e trocamos sem custo. Sem letra miúda, sem nota fiscal, sem enrolação.</div>
+      </details>
+      <details>
+        <summary>Posso trocar ou pedir reembolso?<span class="plus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+        <div class="faq-a">Sim, em até 7 dias após o recebimento, sem precisar justificar o motivo.</div>
+      </details>
+      <details>
+        <summary>Quais formas de pagamento vocês aceitam?<span class="plus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+        <div class="faq-a">Pix (com o menor preço) e cartão de crédito em até 3x sem juros.</div>
+      </details>
+      <details>
+        <summary>O alumínio é resistente mesmo, ou é só marketing?<span class="plus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+        <div class="faq-a">6061 é o mesmo grau usado em peças estruturais de aeronaves — não escolhemos por acaso. Testamos mais de 50 mil aberturas em laboratório interno sem encontrar o limite (ver ficha técnica acima).</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="cta-final" id="comprar">
+  <div class="ambient dark"></div>
+  <div class="foot-word">ABRIDOR</div>
+  <div class="wrap reveal">
+    <span class="eyebrow on-dark">Última chamada</span>
+    <h2 style="margin-top:14px;">Sua última cerveja da faculdade vai ser aberta com isso.</h2>
+    <div class="price-block" style="justify-content:center; margin-top:var(--sp-5);">
+      <span class="price-now">R$ 79<span class="hot">,90</span></span>
+      <span class="price-old">R$ 129,90</span>
+    </div>
+    <button class="btn btn-primary" style="margin-top:var(--sp-6); font-size:15px; padding:17px 32px;" onclick="openCheckout()">Garantir o meu abridor</button>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-row">
+    <span>O ABRIDOR — Empresa Júnior FGV</span>
+    <span>Alumínio 6061 · Garantia vitalícia · Feito pra durar mais que a faculdade</span>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="demoOverlay">
+  <div class="modal-panel">
+    <div class="modal-head"><span>Demonstração · 360°</span><button class="modal-close" id="demoClose" aria-label="Fechar">✕</button></div>
+    <video id="demoVideo" muted loop playsinline controls>
+      <source src="assets/opener-rotating.mp4" type="video/mp4">
+    </video>
+  </div>
+</div>
+
+<div class="modal-overlay" id="checkoutOverlay">
+  <div class="modal-panel">
+    <div class="modal-head"><span>Pré-reserva</span><button class="modal-close" id="checkoutClose" aria-label="Fechar">✕</button></div>
+    <div id="checkoutForm">
+      <form class="checkout-panel" id="leadForm" novalidate>
+        <div class="price-recap"><b>R$ 79,90</b> no Pix · 1 unidade · lote atual</div>
+        <div class="co-field" id="fieldNome">
+          <label for="coNome">Nome</label>
+          <input id="coNome" name="nome" type="text" placeholder="Como podemos te chamar?" autocomplete="name">
+          <span class="err-msg">Preencha seu nome.</span>
+        </div>
+        <div class="co-field" id="fieldContato">
+          <label for="coContato">WhatsApp ou e-mail</label>
+          <input id="coContato" name="contato" type="text" placeholder="(11) 99999-9999 ou seu@email.com" autocomplete="email">
+          <span class="err-msg">Informe um contato válido.</span>
+        </div>
+        <button class="btn btn-primary" type="submit">Confirmar pré-reserva</button>
+      </form>
+    </div>
+    <div id="checkoutSuccess" class="checkout-success" style="display:none;">
+      <div class="ok-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 7"/></svg></div>
+      <h3 style="color:var(--ash-50);">Pré-reserva confirmada!</h3>
+      <p>Vamos te chamar no contato informado com os dados de pagamento.</p>
+      <span class="ref" id="orderRef"></span>
+      <div class="referral-box">
+        <p>Indique pra um amigo — vocês dois ganham desconto quando ele reservar pelo seu link:</p>
+        <div class="referral-row">
+          <input id="referralInput" type="text" readonly>
+          <button type="button" id="referralCopy">Copiar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- exit intent — captura antes de a pessoa sair da página -->
+<div class="modal-overlay" id="exitOverlay">
+  <div class="modal-panel">
+    <div class="modal-head"><span>Antes de ir</span><button class="modal-close" id="exitClose" aria-label="Fechar">✕</button></div>
+    <div class="exit-panel" id="exitForm">
+      <span class="discount-tag" id="exitDiscountLabel">10% OFF</span>
+      <h3 id="exitTitle" style="color:var(--ash-50);">Espera aí!</h3>
+      <p id="exitBody">Deixa seu contato e ganhe 10% a mais de desconto na sua reserva.</p>
+      <div class="co-field" id="exitFieldContato">
+        <input id="exitContato" type="text" placeholder="Seu WhatsApp ou e-mail">
+        <span class="err-msg">Informe um contato válido.</span>
+      </div>
+      <button class="btn btn-primary" style="width:100%;" id="exitSubmit">Quero o desconto</button>
+    </div>
+    <div class="checkout-success" id="exitSuccess" style="display:none;">
+      <div class="ok-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 7"/></svg></div>
+      <h3 style="color:var(--ash-50);">Anotado!</h3>
+      <p>Te chamamos no contato informado com o cupom.</p>
+    </div>
+  </div>
+</div>
+
+<!-- banner de consentimento (LGPD) -->
+<div class="consent-banner" id="consentBanner">
+  <p>Usamos dados de navegação (como origem de acesso e campanha) pra medir resultado e melhorar sua experiência. Você pode aceitar ou recusar.</p>
+  <div class="actions">
+    <button class="consent-reject" id="consentReject">Recusar</button>
+    <button class="consent-accept" id="consentAccept">Aceitar</button>
+  </div>
+</div>
+
+<!-- WhatsApp flutuante -->
+<a class="wa-float" id="waFloat" href="#" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.9-2-1-.3-.1-.5-.1-.6.1-.2.3-.7 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.3-.4.1-.2 0-.4 0-.5-.1-.1-.6-1.4-.8-2-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.1 0 1.2.9 2.4 1 2.6.1.2 1.8 2.8 4.4 3.8.6.3 1.1.4 1.5.6.6.2 1.2.2 1.6.1.5-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.1-.3-.2-.6-.3z"/><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3.1.8.8-3-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
+</a>
+
+<!-- chatbot -->
+<button class="chat-toggle" id="chatToggle">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.4 8.4 0 0 1-1.1 4.3 8.5 8.5 0 0 1-7.4 4.2 8.4 8.4 0 0 1-4.3-1.1L3 20l1.1-5.2A8.4 8.4 0 0 1 3 11.5a8.5 8.5 0 0 1 8.5-8.5 8.4 8.4 0 0 1 8.5 8.5z"/></svg>
+  <span id="chatToggleLabel">Fale com o Abridor</span>
+</button>
+<div class="chat-panel" id="chatPanel">
+  <div class="chat-head"><span id="chatHeadLabel">Assistente virtual</span><button class="modal-close" id="chatClose" aria-label="Fechar">✕</button></div>
+  <div class="chat-body" id="chatBody"></div>
+  <div class="chat-foot">
+    <input id="chatInput" type="text" placeholder="Digite sua pergunta...">
+    <button id="chatSend" aria-label="Enviar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7Z"/></svg></button>
+  </div>
+  <div class="chat-note">Respostas geradas por IA — confirme informações importantes.</div>
+</div>
+
+<div class="sticky-bar" id="stickyBar">
+  <div class="p">R$ 79,90 <small>ou 3x de R$ 29,97</small></div>
+  <button class="btn btn-primary" onclick="openCheckout()">Comprar agora</button>
+</div>
+
+<script>
+(function(){
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add('is-visible'); io.unobserve(e.target); }
+      });
+    }, {threshold:.12, rootMargin:'0px 0px -30px 0px'});
+    document.querySelectorAll('.reveal, .stagger').forEach(function(el){
+      if(!el.classList.contains('is-visible')) io.observe(el);
+    });
+  } else {
+    document.querySelectorAll('.reveal, .stagger').forEach(function(el){ el.classList.add('is-visible'); });
+  }
+
+  var overlay = document.getElementById('demoOverlay');
+  var openBtn = document.getElementById('openDemo');
+  var closeBtn = document.getElementById('demoClose');
+  var demoVideo = document.getElementById('demoVideo');
+  if(overlay && openBtn){
+    openBtn.addEventListener('click', function(){
+      overlay.classList.add('open');
+      demoVideo.currentTime = 0;
+      demoVideo.play().catch(function(){});
+    });
+    closeBtn.addEventListener('click', function(){ overlay.classList.remove('open'); demoVideo.pause(); });
+    overlay.addEventListener('click', function(e){ if(e.target === overlay){ overlay.classList.remove('open'); demoVideo.pause(); } });
+    document.addEventListener('keydown', function(e){ if(e.key === 'Escape'){ overlay.classList.remove('open'); demoVideo.pause(); } });
+  }
+
+  /* barra fixa mobile — aparece quando o hero sai da tela */
+  var stickyBar = document.getElementById('stickyBar');
+  var heroEl = document.querySelector('.hero');
+  if(stickyBar && heroEl && 'IntersectionObserver' in window){
+    var barIO = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.boundingClientRect.top < 0){ stickyBar.classList.toggle('show', !e.isIntersecting); }
+        else { stickyBar.classList.remove('show'); }
+      });
+    }, {threshold:0});
+    barIO.observe(heroEl);
+  }
+
+  /* pré-reserva — checkout de demonstração, sem cobrança real.
+     Toda a lógica de dados/consentimento/rastreamento vem do EJ Data Kit
+     (assets/ej-data-kit.js) — este bloco só cuida da interface do modal. */
+  var EJC = (window.EJ_CONFIG || {});
+  var coOverlay = document.getElementById('checkoutOverlay');
+  var coClose = document.getElementById('checkoutClose');
+  var leadForm = document.getElementById('leadForm');
+  var formWrap = document.getElementById('checkoutForm');
+  var successWrap = document.getElementById('checkoutSuccess');
+  var orderRef = document.getElementById('orderRef');
+
+  window.openCheckout = function(){
+    if(!coOverlay) return;
+    formWrap.style.display = '';
+    successWrap.style.display = 'none';
+    leadForm.reset();
+    document.getElementById('fieldNome').classList.remove('error');
+    document.getElementById('fieldContato').classList.remove('error');
+    coOverlay.classList.add('open');
+    if(window.EJKit) EJKit.track('InitiateCheckout', 'begin_checkout', {value:79.90, currency:'BRL'});
+  };
+  function closeCheckout(){ coOverlay.classList.remove('open'); }
+  if(coClose) coClose.addEventListener('click', closeCheckout);
+  if(coOverlay) coOverlay.addEventListener('click', function(e){ if(e.target === coOverlay) closeCheckout(); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && coOverlay && coOverlay.classList.contains('open')) closeCheckout(); });
+
+  if(leadForm){
+    leadForm.addEventListener('submit', function(e){
+      e.preventDefault();
+      var nomeEl = document.getElementById('coNome');
+      var contatoEl = document.getElementById('coContato');
+      var nome = nomeEl.value.trim();
+      var contato = contatoEl.value.trim();
+      var contatoOk = /.+@.+\..+/.test(contato) || contato.replace(/\D/g,'').length >= 10;
+
+      document.getElementById('fieldNome').classList.toggle('error', nome.length < 2);
+      document.getElementById('fieldContato').classList.toggle('error', !contatoOk);
+      if(nome.length < 2 || !contatoOk) return;
+
+      leadForm.classList.add('co-loading');
+      EJKit.saveLead({nome:nome, contato:contato, quantidade:1, valor:79.90}).then(function(lead){
+        EJKit.track('Lead', 'generate_lead', {value:79.90, currency:'BRL'});
+        leadForm.classList.remove('co-loading');
+        formWrap.style.display = 'none';
+        successWrap.style.display = '';
+        orderRef.textContent = 'Referência: ' + lead.ref;
+        var refInput = document.getElementById('referralInput');
+        if(refInput) refInput.value = EJKit.referralLink(lead.ref);
+      });
+    });
+  }
+
+  /* ── indicação: copiar link ── */
+  var referralCopy = document.getElementById('referralCopy');
+  if(referralCopy){
+    referralCopy.addEventListener('click', function(){
+      var input = document.getElementById('referralInput');
+      input.select();
+      navigator.clipboard && navigator.clipboard.writeText(input.value).then(function(){
+        referralCopy.textContent = 'Copiado!';
+        setTimeout(function(){ referralCopy.textContent = 'Copiar'; }, 2000);
+      }).catch(function(){});
+    });
+  }
+
+  /* ── WhatsApp flutuante — número e mensagem vêm da config ── */
+  var waFloat = document.getElementById('waFloat');
+  if(waFloat && EJC.whatsapp){
+    var msg = encodeURIComponent(EJC.whatsapp.message || '');
+    waFloat.href = 'https://wa.me/' + EJC.whatsapp.phone + '?text=' + msg;
+  }
+
+  /* ── banner de consentimento (LGPD) ── */
+  var consentBanner = document.getElementById('consentBanner');
+  if(consentBanner && window.EJKit){
+    if(!EJKit.getConsent()){
+      setTimeout(function(){ consentBanner.classList.add('show'); }, 800);
+    }
+    document.getElementById('consentAccept').addEventListener('click', function(){
+      EJKit.setConsent('accepted');
+      EJKit.onConsentGranted();
+      consentBanner.classList.remove('show');
+    });
+    document.getElementById('consentReject').addEventListener('click', function(){
+      EJKit.setConsent('rejected');
+      consentBanner.classList.remove('show');
+    });
+  }
+
+  /* ── exit intent — dispara quando o mouse sai por cima da janela (desktop);
+     em mobile, não existe esse gesto, então não forçamos um substituto artificial. */
+  var exitOverlay = document.getElementById('exitOverlay');
+  var exitShown = false;
+  if(exitOverlay && EJC.exitIntent){
+    document.getElementById('exitTitle').textContent = EJC.exitIntent.title || '';
+    document.getElementById('exitBody').textContent = EJC.exitIntent.body || '';
+    document.getElementById('exitDiscountLabel').textContent = EJC.exitIntent.discountLabel || '';
+    document.addEventListener('mouseleave', function(e){
+      if(e.clientY > 0 || exitShown || (coOverlay && coOverlay.classList.contains('open'))) return;
+      exitShown = true;
+      exitOverlay.classList.add('open');
+    });
+    document.getElementById('exitClose').addEventListener('click', function(){ exitOverlay.classList.remove('open'); });
+    exitOverlay.addEventListener('click', function(e){ if(e.target === exitOverlay) exitOverlay.classList.remove('open'); });
+    document.getElementById('exitSubmit').addEventListener('click', function(){
+      var input = document.getElementById('exitContato');
+      var contato = input.value.trim();
+      var ok = /.+@.+\..+/.test(contato) || contato.replace(/\D/g,'').length >= 10;
+      document.getElementById('exitFieldContato').classList.toggle('error', !ok);
+      if(!ok) return;
+      EJKit.saveLead({contato:contato, origemCaptura:'exit-intent', cupom: EJC.exitIntent.discountLabel}).then(function(){
+        EJKit.track('Lead', 'generate_lead', {value:0, currency:'BRL'});
+        document.getElementById('exitForm').style.display = 'none';
+        document.getElementById('exitSuccess').style.display = '';
+      });
+    });
+  }
+
+  /* ── chatbot — usa a capability "sample" do Artifact quando publicado;
+     em arquivo local ou sem a capability, mostra um aviso amigável em vez
+     de fingir que está funcionando. */
+  var chatToggle = document.getElementById('chatToggle');
+  var chatPanel = document.getElementById('chatPanel');
+  var chatBody = document.getElementById('chatBody');
+  var chatInput = document.getElementById('chatInput');
+  var chatSend = document.getElementById('chatSend');
+  var chatSession = null; // instância do claude.use('sample'), resolvida uma vez
+  var chatHistory = [];
+
+  if(chatToggle && EJC.chat){
+    document.getElementById('chatToggleLabel').textContent = EJC.chat.label || 'Assistente';
+    document.getElementById('chatHeadLabel').textContent = EJC.chat.label || 'Assistente';
+
+    function addMsg(role, text){
+      var div = document.createElement('div');
+      div.className = 'chat-msg ' + (role === 'user' ? 'user' : 'bot');
+      div.textContent = text;
+      chatBody.appendChild(div);
+      chatBody.scrollTop = chatBody.scrollHeight;
+    }
+
+    chatToggle.addEventListener('click', function(){
+      chatPanel.classList.toggle('open');
+      if(chatPanel.classList.contains('open') && chatBody.children.length === 0){
+        addMsg('bot', 'Oi! Pode perguntar sobre material, garantia, prazo ou preço.');
+      }
+    });
+    document.getElementById('chatClose').addEventListener('click', function(){ chatPanel.classList.remove('open'); });
+
+    async function getSample(){
+      if(chatSession !== null) return chatSession;
+      try{
+        if(window.claude && typeof window.claude.use === 'function'){
+          chatSession = await window.claude.use('sample');
+        } else {
+          chatSession = null;
+        }
+      }catch(e){ chatSession = null; }
+      return chatSession;
+    }
+
+    async function sendChat(){
+      var text = chatInput.value.trim();
+      if(!text) return;
+
+      var sample = await getSample();
+      if(!sample){
+        addMsg('user', text);
+        chatInput.value = '';
+        addMsg('bot', 'O chat com IA só funciona na versão publicada deste site (capability "sample" do Artifact). Nesta versão local, chama no WhatsApp que a gente responde rapidinho!');
+        return;
+      }
+
+      addMsg('user', text);
+      chatInput.value = '';
+      chatHistory.push({role:'user', content:text});
+
+      var thinking = document.createElement('div');
+      thinking.className = 'chat-msg bot';
+      thinking.textContent = 'Pensando...';
+      chatBody.appendChild(thinking);
+      chatBody.scrollTop = chatBody.scrollHeight;
+      try{
+        // padrão de chat: instrução fixa como primeiro turno "user", seguida
+        // do histórico real da conversa — cache desligado pra sempre pedir
+        // uma resposta nova a cada pergunta.
+        var turns = [{role:'user', content: EJC.chat.systemPrompt}].concat(chatHistory);
+        var res = await sample(turns, {modelTier:'quick', cache:false});
+        thinking.textContent = res.text;
+        chatHistory.push({role:'assistant', content: res.text});
+      }catch(err){
+        thinking.textContent = err && err.code === 'not_granted'
+          ? 'Você precisa permitir o uso da IA pra conversar por aqui.'
+          : 'Não consegui responder agora — tenta de novo ou chama no WhatsApp.';
+        chatHistory.pop();
+      }
+      chatBody.scrollTop = chatBody.scrollHeight;
+    }
+    chatSend.addEventListener('click', sendChat);
+    chatInput.addEventListener('keydown', function(e){ if(e.key === 'Enter') sendChat(); });
+  }
+})();
+</script>
+</body>
+</html>

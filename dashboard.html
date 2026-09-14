@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Painel — O Abridor</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<!--
+  PAINEL GENÉRICO — a mesma página serve pra qualquer projeto da EJ: só troca
+  o `project` no EJ_CONFIG abaixo (tem que ser igual ao usado no site de vendas)
+  e o painel lê os leads certos, sejam de um e-commerce de produto ou de um
+  formulário de contato institucional. Isso é a "camada de relatório" —
+  hoje sob demanda (abre a página e vê); pra virar um relatório PUSH semanal
+  (WhatsApp/e-mail automático), essa mesma leitura precisa rodar num job
+  agendado (cron de uma function serverless, ou um gatilho de tempo no
+  Zapier/Make lendo a mesma fonte de dados).
+-->
+<script>
+  window.EJ_CONFIG = { project: 'abridor-fgv' };
+</script>
+<script src="assets/ej-data-kit.js"></script>
+<style>
+  :root{
+    --ash-50:#FAF8F5; --ash-100:#F1ECE5; --ash-200:#E4DCD0; --ash-300:#CFC3B2;
+    --ash-400:#A79A87; --ash-500:#857767; --ash-600:#6B5F52; --ash-700:#524940;
+    --ash-800:#38322C; --ash-900:#211D19; --ink:#17130F;
+    --ember-500:#E8560E; --ember-600:#C7440A; --ember-50:#FDF1E9;
+    --success:#3F8452; --success-bg:#E7F3E9;
+    --canvas:var(--ash-100); --paper:var(--ash-50); --line:var(--ash-300);
+    --font-sans:'Geist', -apple-system, sans-serif;
+    --font-mono:'Geist Mono', ui-monospace, monospace;
+    --r-sm:8px; --r-md:14px;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; background:var(--canvas); color:var(--ink); font-family:var(--font-sans); line-height:1.5;}
+  .wrap{max-width:1000px; margin:0 auto; padding:40px 24px 80px;}
+  h1{font-size:28px; font-weight:800; letter-spacing:-.01em; margin:0 0 4px;}
+  .sub{font-family:var(--font-mono); font-size:12px; color:var(--ash-500); margin-bottom:32px;}
+  .cards{display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:16px; margin-bottom:40px;}
+  .card{background:var(--paper); border:1px solid var(--line); border-radius:var(--r-md); padding:20px;}
+  .card b{display:block; font-size:34px; font-weight:800; letter-spacing:-.02em;}
+  .card span{font-family:var(--font-mono); font-size:10.5px; text-transform:uppercase; letter-spacing:.06em; color:var(--ash-600);}
+  .card.hot b{color:var(--ember-500);}
+  h2{font-size:16px; font-weight:700; margin:0 0 14px;}
+  .block{margin-bottom:36px;}
+  .bars{display:flex; flex-direction:column; gap:8px;}
+  .bar-row{display:grid; grid-template-columns:120px 1fr 40px; align-items:center; gap:10px; font-size:12.5px;}
+  .bar-row .track{height:10px; background:var(--ash-200); border-radius:5px; overflow:hidden;}
+  .bar-row .fill{height:100%; background:var(--ember-500); border-radius:5px;}
+  .bar-row .n{font-family:var(--font-mono); font-size:11px; color:var(--ash-600); text-align:right;}
+  table{width:100%; border-collapse:collapse; font-size:13px; background:var(--paper); border:1px solid var(--line); border-radius:var(--r-sm); overflow:hidden;}
+  th{font-family:var(--font-mono); font-size:10px; text-transform:uppercase; letter-spacing:.05em; color:var(--ash-600); text-align:left; padding:10px 14px; background:var(--ash-200); border-bottom:1px solid var(--line);}
+  td{padding:10px 14px; border-bottom:1px solid var(--line);}
+  tr:last-child td{border-bottom:none;}
+  .pill{display:inline-flex; font-family:var(--font-mono); font-size:10.5px; background:var(--success-bg); color:var(--success); border-radius:99px; padding:2px 9px;}
+  .empty{font-size:13.5px; color:var(--ash-500); padding:24px; text-align:center; border:1px dashed var(--ash-300); border-radius:var(--r-sm);}
+  .refresh{font-family:var(--font-mono); font-size:11px; background:none; border:1px solid var(--ash-400); color:var(--ash-700); border-radius:99px; padding:6px 14px; cursor:pointer;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div style="display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:12px;">
+    <div>
+      <h1>Painel de leads</h1>
+      <div class="sub" id="projLabel">projeto: abridor-fgv</div>
+    </div>
+    <button class="refresh" id="refreshBtn">Atualizar</button>
+  </div>
+
+  <div class="cards" id="cards"></div>
+
+  <div class="block">
+    <h2>Origem de aquisição (UTM source)</h2>
+    <div class="bars" id="sourceBars"></div>
+  </div>
+
+  <div class="block">
+    <h2>Leads recentes</h2>
+    <div id="tableWrap"></div>
+  </div>
+</div>
+
+<script>
+(async function(){
+  function fmtDate(iso){
+    try{ var d = new Date(iso); return d.toLocaleDateString('pt-BR') + ' ' + d.toLocaleTimeString('pt-BR', {hour:'2-digit', minute:'2-digit'}); }
+    catch(e){ return iso || '—'; }
+  }
+
+  async function render(){
+    document.getElementById('projLabel').textContent = 'projeto: ' + (window.EJKit ? EJKit.project : '—');
+    var leads = window.EJKit ? await EJKit.getAllLeads() : [];
+
+    var total = leads.length;
+    var receita = leads.reduce(function(s,l){ return s + (Number(l.valor)||0); }, 0);
+    var referidos = leads.filter(function(l){ return l.ref && l.ref.indexOf('RES') === -1 && l.origemCaptura !== 'exit-intent'; }).length;
+    var exitLeads = leads.filter(function(l){ return l.origemCaptura === 'exit-intent'; }).length;
+
+    document.getElementById('cards').innerHTML =
+      '<div class="card hot"><b>' + total + '</b><span>Leads totais</span></div>' +
+      '<div class="card"><b>R$ ' + receita.toFixed(2).replace('.', ',') + '</b><span>Valor potencial</span></div>' +
+      '<div class="card"><b>' + exitLeads + '</b><span>Capturados no exit-intent</span></div>' +
+      '<div class="card"><b>' + (total ? Math.round((leads.filter(function(l){return l.ref;}).length/total)*100) : 0) + '%</b><span>Com referência salva</span></div>';
+
+    var bySource = {};
+    leads.forEach(function(l){
+      var src = l.utm_source || (l.ref && l.ref.length < 12 ? 'indicação' : null) || 'direto';
+      bySource[src] = (bySource[src]||0) + 1;
+    });
+    var max = Math.max.apply(null, Object.values(bySource).concat([1]));
+    var barsHtml = Object.keys(bySource).sort(function(a,b){ return bySource[b]-bySource[a]; }).map(function(k){
+      var pct = Math.round((bySource[k]/max)*100);
+      return '<div class="bar-row"><span>'+k+'</span><span class="track"><span class="fill" style="width:'+pct+'%"></span></span><span class="n">'+bySource[k]+'</span></div>';
+    }).join('');
+    document.getElementById('sourceBars').innerHTML = barsHtml || '<div class="empty">Sem dados de origem ainda.</div>';
+
+    if(!leads.length){
+      document.getElementById('tableWrap').innerHTML = '<div class="empty">Nenhum lead ainda — faça uma pré-reserva no site pra ver os dados aparecerem aqui.</div>';
+    } else {
+      var rows = leads.slice(0,50).map(function(l){
+        return '<tr><td>'+fmtDate(l.criadoEm)+'</td><td>'+(l.nome||'—')+'</td><td>'+(l.contato||'—')+'</td>' +
+               '<td><span class="pill">'+(l.ref||'—')+'</span></td><td>'+(l.utm_source||l.origem||'direto')+'</td></tr>';
+      }).join('');
+      document.getElementById('tableWrap').innerHTML =
+        '<table><thead><tr><th>Data</th><th>Nome</th><th>Contato</th><th>Ref</th><th>Origem</th></tr></thead><tbody>'+rows+'</tbody></table>';
+    }
+  }
+
+  document.getElementById('refreshBtn').addEventListener('click', render);
+  render();
+})();
+</script>
+</body>
+</html>
