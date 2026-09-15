@@ -60,9 +60,11 @@
      - Meta Pixel:  business.facebook.com → Gerenciador de Eventos → seu ID é só números -->
 <script>
   window.EJ_ANALYTICS = {
-    ga4Id: '',       // ex.: 'G-XXXXXXXXXX'
-    clarityId: '',   // ex.: 'abcd1234ef'
-    metaPixelId: ''  // ex.: '1234567890123'
+    ga4Id: '',                    // ex.: 'G-XXXXXXXXXX'
+    clarityId: '',                // ex.: 'abcd1234ef'
+    metaPixelId: '',              // ex.: '1234567890123'
+    searchConsoleVerification: '' // cole aqui só o CONTEÚDO da tag de verificação do Search Console
+                                   // (Search Console → método "Tag HTML" → copia o valor de content="...")
   };
 </script>
 <script>
@@ -97,6 +99,13 @@
     })(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
     fbq('init', cfg.metaPixelId);
     fbq('track', 'PageView');
+  }
+
+  if(cfg.searchConsoleVerification){
+    var m = document.createElement('meta');
+    m.name = 'google-site-verification';
+    m.content = cfg.searchConsoleVerification;
+    document.head.appendChild(m);
   }
 })();
 </script>
